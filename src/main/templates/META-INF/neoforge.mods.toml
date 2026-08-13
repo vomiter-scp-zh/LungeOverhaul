@@ -13,7 +13,7 @@ config="lungeoverhaul.mixins.json"
 [[dependencies.${mod_id}]]
 modId="neoforge"
 type="required"
-versionRange="[${neo_version},)"
+versionRange="${loader_version_range}"
 ordering="NONE"
 side="BOTH"
 
