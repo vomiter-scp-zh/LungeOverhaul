@@ -1,0 +1,11 @@
+{
+  "key.categories.lungeoverhaul.main": "Lunge Overhaul",
+  "key.lungeoverhaul.cycle_mode": "Cycle Lunge mode",
+  "message.lungeoverhaul.lunge_mode": "Lunge Mode: %s",
+  "message.lungeoverhaul.player_default": "Player Default: %s",
+  "lunge_mode.lungeoverhaul.player_default": "Player Default",
+  "lunge_mode.lungeoverhaul.disabled": "Disabled",
+  "lunge_mode.lungeoverhaul.jab_only": "Jab Only",
+  "lunge_mode.lungeoverhaul.charge_only": "Charge Only",
+  "lunge_mode.lungeoverhaul.both": "Jab + Charge"
+}

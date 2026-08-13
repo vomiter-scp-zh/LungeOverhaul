@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.vomiter.lungeoverhaul.mixin",
+  "mixins": [
+    "ApplyEntityImpulseMixin",
+    "EnchantmentHelperMixin",
+    "EnchantmentMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1 }
+}
