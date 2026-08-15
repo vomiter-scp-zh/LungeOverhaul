@@ -6,6 +6,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.lungeoverhaul.common.LungeThreadLocals;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -18,12 +20,14 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(EnchantmentHelper.class)
 public class EnchantmentHelperMixin {
 
-    @WrapMethod(method = "doPostPiercingAttackEffects")
-    private static void lungeoverhaul$doPostPiercingAttackEffects(ServerLevel serverLevel, LivingEntity user, Operation<Void> original){
+    @WrapMethod(method = "doPostAttackEffects")
+    private static void lungeoverhaul$doPostPiercingAttackEffects(ServerLevel serverLevel, Entity user, DamageSource damageSource, Operation<Void> original){
         try{
-            LungeThreadLocals.isDoingPostPiercing.set(true);
-            LungeThreadLocals.spearUsingEntity.set(user);
-            original.call(serverLevel, user);
+            if (user instanceof LivingEntity livingEntity){
+                LungeThreadLocals.isDoingPostPiercing.set(true);
+                LungeThreadLocals.spearUsingEntity.set(livingEntity);
+            }
+            original.call(serverLevel, user, damageSource);
         } finally {
             LungeThreadLocals.isDoingPostPiercing.remove();
             LungeThreadLocals.spearUsingEntity.remove();

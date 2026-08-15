@@ -4,9 +4,15 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.lungeoverhaul.common.LungeModes;
 import com.vomiter.lungeoverhaul.common.LungeThreadLocals;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.ConditionalEffect;
+import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.TargetedConditionalEffect;
+import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,15 +23,16 @@ import java.util.List;
 
 @Mixin(Enchantment.class)
 public class EnchantmentMixin {
-    @WrapOperation(method = "doPostPiercingAttack",
+    @WrapOperation(method = "doPostAttack(Lnet/minecraft/server/level/ServerLevel;ILnet/minecraft/world/item/enchantment/EnchantedItemInUse;Lnet/minecraft/world/item/enchantment/EnchantmentTarget;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;)V",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/enchantment/Enchantment;" +
-                            "applyEffects(Ljava/util/List;Lnet/minecraft/world/level/storage/loot/LootContext;" +
-                            "Lnet/minecraft/world/item/enchantment/Enchantment$GenericAction;)V"))
+                    target = "Lnet/minecraft/world/item/enchantment/Enchantment;doPostAttack(Lnet/minecraft/world/item/enchantment/TargetedConditionalEffect;Lnet/minecraft/server/level/ServerLevel;ILnet/minecraft/world/item/enchantment/EnchantedItemInUse;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;)V"))
     private void lungeoverhaul$doPostPiercingAttack(
-            List<ConditionalEffect<@NotNull Object>> effects,
-            LootContext filterData,
-            @Coerce Object action,
+            TargetedConditionalEffect<EnchantmentEntityEffect> effect,
+            ServerLevel level,
+            int enchantmentLevel,
+            EnchantedItemInUse item,
+            Entity p_entity,
+            DamageSource damageSource,
             Operation<Void> original
     ){
         if(
@@ -36,6 +43,6 @@ public class EnchantmentMixin {
         ){
             return;
         }
-        original.call(effects, filterData, action);
+        original.call(effect, level, enchantmentLevel, item, p_entity, damageSource);
     }
 }

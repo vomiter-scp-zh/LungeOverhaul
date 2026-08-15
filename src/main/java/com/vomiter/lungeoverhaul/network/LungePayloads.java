@@ -32,6 +32,6 @@ public final class LungePayloads {
         }
         LungeMode next = LungeModes.stored(stack).next();
         LungeModes.set(stack, next);
-        player.sendOverlayMessage(Component.translatable("message.lungeoverhaul.lunge_mode", next.displayName()));
+        player.displayClientMessage(Component.translatable("message.lungeoverhaul.lunge_mode", next.displayName()), true);
     }
 }

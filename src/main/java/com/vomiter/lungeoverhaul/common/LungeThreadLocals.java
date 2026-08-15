@@ -8,6 +8,6 @@ public class LungeThreadLocals {
     public static ThreadLocal<Boolean> isDoingPostPiercing = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<Boolean> isDoingLunge = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<LivingEntity> spearUsingEntity = ThreadLocal.withInitial(() -> null);
-    public static ThreadLocal<EnchantedItemInUse> spear = ThreadLocal.withInitial(() -> new EnchantedItemInUse(ItemStack.EMPTY, null, null, _ ->{}));
+    public static ThreadLocal<EnchantedItemInUse> spear = ThreadLocal.withInitial(() -> new EnchantedItemInUse(ItemStack.EMPTY, null, null,  i -> {}));
 
 }

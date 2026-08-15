@@ -32,7 +32,6 @@ public final class LungeOverhaul {
         modContainer.registerConfig(ModConfig.Type.COMMON, LungeConfig.SPEC);
         modBus.addListener(LungePayloads::register);
 
-        // NeoForge's shared gameplay bus: these are server-authoritative rules.
         NeoForge.EVENT_BUS.addListener(LungeEvents::tickCharge);
         NeoForge.EVENT_BUS.addListener(LungeEvents::chargeHitExhaustion);
         NeoForge.EVENT_BUS.addListener(LungeEvents::clearChargeState);
