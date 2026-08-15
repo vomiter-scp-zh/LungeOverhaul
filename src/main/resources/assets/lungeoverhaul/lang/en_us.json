@@ -1,11 +1,11 @@
 {
-  "key.category.lungeoverhaul.main": "突刺翻修",
-  "key.lungeoverhaul.cycle_mode": "切換突刺模式",
-  "message.lungeoverhaul.lunge_mode": "突刺模式：%s",
-  "message.lungeoverhaul.player_default": "玩家預設值：%s",
-  "lunge_mode.lungeoverhaul.player_default": "玩家預設值",
-  "lunge_mode.lungeoverhaul.disabled": "停用",
-  "lunge_mode.lungeoverhaul.jab_only": "僅戳刺",
-  "lunge_mode.lungeoverhaul.charge_only": "僅衝鋒",
-  "lunge_mode.lungeoverhaul.both": "戳刺＋蓄力"
+  "key.category.lungeoverhaul.main": "Lunge Overhaul",
+  "key.lungeoverhaul.cycle_mode": "Switch Lunge Mode",
+  "message.lungeoverhaul.lunge_mode": "Lunge Mode: %s",
+  "message.lungeoverhaul.player_default": "Player's Default: %s",
+  "lunge_mode.lungeoverhaul.player_default": "Player's Default",
+  "lunge_mode.lungeoverhaul.disabled": "Disabled",
+  "lunge_mode.lungeoverhaul.jab_only": "Jab Only",
+  "lunge_mode.lungeoverhaul.charge_only": "Charge Only",
+  "lunge_mode.lungeoverhaul.both": "Jab + Charge"
 }
