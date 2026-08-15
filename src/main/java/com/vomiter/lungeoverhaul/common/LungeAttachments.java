@@ -15,7 +15,7 @@ public final class LungeAttachments {
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, LungeOverhaul.MOD_ID);
     public static final Supplier<AttachmentType<@NotNull String>> DEFAULT_MODE = ATTACHMENTS.register("default_mode", () ->
             AttachmentType.builder(LungeMode.JAB_ONLY::id)
-                    .serialize(Codec.STRING.fieldOf("mode"))
+                    .serialize(Codec.STRING)
                     .copyOnDeath()
                     .build());
 

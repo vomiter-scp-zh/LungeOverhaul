@@ -1,19 +1,20 @@
 package com.vomiter.lungeoverhaul.common.event;
 
+import com.notunanancyowen.spears.Spears;
+import com.notunanancyowen.spears.components.KineticWeapon;
 import com.vomiter.lungeoverhaul.LungeConfig;
 import com.vomiter.lungeoverhaul.common.LungeModes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.KineticWeapon;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -77,7 +78,10 @@ public final class LungeEvents {
                 CommonHooks.resolveLookup(Registries.ENCHANTMENT);
         assert lookup != null;
 
-        int lungeLevel = lookup.get(Enchantments.LUNGE)
+        int lungeLevel = lookup.get(ResourceKey.create(
+                        Registries.ENCHANTMENT,
+                        ResourceLocation.fromNamespaceAndPath("minecraft", "lunge")
+                ))
                 .map(enchantmentReference ->
                         EnchantmentHelper.getTagEnchantmentLevel(
                                 enchantmentReference,
@@ -184,12 +188,12 @@ public final class LungeEvents {
 
 
         if (!player.isUsingItem()
-                || !stack.is(ItemTags.SPEARS)) {
+                || !stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "spears")))) {
             return false;
         }
 
         KineticWeapon kineticWeapon =
-                stack.get(DataComponents.KINETIC_WEAPON);
+                stack.get(Spears.KINETIC_WEAPON);
 
         if (kineticWeapon == null) {
             return false;
@@ -212,7 +216,10 @@ public final class LungeEvents {
 
         Holder<Enchantment> lunge = player.registryAccess()
                 .lookupOrThrow(Registries.ENCHANTMENT)
-                .getOrThrow(Enchantments.LUNGE);
+                .getOrThrow(ResourceKey.create(
+                        Registries.ENCHANTMENT,
+                        ResourceLocation.fromNamespaceAndPath("minecraft", "lunge")
+                ));
 
         if (stack.getEnchantmentLevel(lunge) <= 0) {
             return false;

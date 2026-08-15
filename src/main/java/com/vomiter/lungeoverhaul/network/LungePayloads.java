@@ -3,6 +3,7 @@ package com.vomiter.lungeoverhaul.network;
 import com.vomiter.lungeoverhaul.common.LungeMode;
 import com.vomiter.lungeoverhaul.common.LungeModes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +28,7 @@ public final class LungePayloads {
 
     private static void cycle(ServerPlayer player) {
         ItemStack stack = player.getMainHandItem();
-        if (!stack.is(ItemTags.SPEARS)) {
+        if (!stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "spears")))) {
             return;
         }
         LungeMode next = LungeModes.stored(stack).next();

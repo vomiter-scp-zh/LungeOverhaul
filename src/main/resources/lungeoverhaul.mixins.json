@@ -2,9 +2,8 @@
   "required": true,
   "package": "com.vomiter.lungeoverhaul.mixin",
   "mixins": [
-    "ApplyEntityImpulseMixin",
-    "EnchantmentHelperMixin",
-    "EnchantmentMixin"
+    "PiercingWeaponMixin",
+    "TriggerStabEffectsC2SPacketMixin"
   ],
   "client": [],
   "injectors": {
