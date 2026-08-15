@@ -23,26 +23,23 @@ import java.util.List;
 
 @Mixin(Enchantment.class)
 public class EnchantmentMixin {
-    @WrapOperation(method = "doPostAttack(Lnet/minecraft/server/level/ServerLevel;ILnet/minecraft/world/item/enchantment/EnchantedItemInUse;Lnet/minecraft/world/item/enchantment/EnchantmentTarget;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;)V",
+    @WrapOperation(method = "doLunge",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/enchantment/Enchantment;doPostAttack(Lnet/minecraft/world/item/enchantment/TargetedConditionalEffect;Lnet/minecraft/server/level/ServerLevel;ILnet/minecraft/world/item/enchantment/EnchantedItemInUse;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;)V"))
+                    target = "Lnet/minecraft/world/item/enchantment/Enchantment;applyEffects(Ljava/util/List;Lnet/minecraft/world/level/storage/loot/LootContext;Ljava/util/function/Consumer;)V"))
     private void lungeoverhaul$doPostPiercingAttack(
-            TargetedConditionalEffect<EnchantmentEntityEffect> effect,
-            ServerLevel level,
-            int enchantmentLevel,
-            EnchantedItemInUse item,
-            Entity p_entity,
-            DamageSource damageSource,
+            List<ConditionalEffect<@NotNull Object>> effects,
+            LootContext filterData,
+            @Coerce Object action,
             Operation<Void> original
     ){
         if(
                 LungeThreadLocals.isDoingLunge.get()
-                && LungeThreadLocals.isDoingPostPiercing.get()
-                && LungeThreadLocals.spearUsingEntity.get() instanceof Player player
-                && !LungeModes.resolved(player, LungeThreadLocals.spear.get().itemStack()).enablesJab()
+                        && LungeThreadLocals.isDoingPostPiercing.get()
+                        && LungeThreadLocals.spearUsingEntity.get() instanceof Player player
+                        && !LungeModes.resolved(player, LungeThreadLocals.spear.get().itemStack()).enablesJab()
         ){
             return;
         }
-        original.call(effect, level, enchantmentLevel, item, p_entity, damageSource);
+        original.call(effects, filterData, action);
     }
 }
