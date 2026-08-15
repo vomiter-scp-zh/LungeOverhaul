@@ -20,7 +20,17 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = PiercingWeapon.class, remap = false)
 public class PiercingWeaponMixin {
 
-    @WrapOperation(method = "stab", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/effects/EnchantmentEntityEffect;apply(Lnet/minecraft/server/level/ServerLevel;ILnet/minecraft/world/item/enchantment/EnchantedItemInUse;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/Vec3;)V"))
+    @WrapOperation(method = "stab",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/enchantment/effects/EnchantmentEntityEffect;" +
+                            "apply(Lnet/minecraft/server/level/ServerLevel;" +
+                            "ILnet/minecraft/world/item/enchantment/EnchantedItemInUse;" +
+                            "Lnet/minecraft/world/entity/Entity;" +
+                            "Lnet/minecraft/world/phys/Vec3;)V",
+                    remap = false
+            )
+    )
     private void lungeoverhaul$runIterationOnItem(
             EnchantmentEntityEffect instance,
             ServerLevel serverLevel,
